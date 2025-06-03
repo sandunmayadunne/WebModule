@@ -17,7 +17,7 @@ public class Home extends HttpServlet {
 
         try {
             InitialContext ctx = new InitialContext();
-            UserDetails details = (UserDetails) ctx.lookup("java:global/ejb-module/UserDetailsBean");
+            UserDetails details = (UserDetails) ctx.lookup("UserInfo");
             response.getWriter().println("Hello, "+details.getName());
         }catch (Exception e) {
 
