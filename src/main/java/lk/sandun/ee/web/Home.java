@@ -1,5 +1,6 @@
 package lk.sandun.ee.web;
 
+import jakarta.ejb.EJB;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -12,16 +13,18 @@ import java.io.IOException;
 
 @WebServlet("/home")
 public class Home extends HttpServlet {
+    @EJB(lookup = "UserInfo")
+    private UserDetails userDetails;
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        try {
-            InitialContext ctx = new InitialContext();
-            UserDetails details = (UserDetails) ctx.lookup("UserInfo");
-            response.getWriter().println("Hello, "+details.getName());
-        }catch (Exception e) {
-
-        }
+//
+//        try {
+//            InitialContext ctx = new InitialContext();
+//            UserDetails details = (UserDetails) ctx.lookup("UserInfo");
+//        }catch (Exception e) {
+//            e.printStackTrace();
+//        }
+        response.getWriter().println(userDetails.getName());
 
     }
 }
